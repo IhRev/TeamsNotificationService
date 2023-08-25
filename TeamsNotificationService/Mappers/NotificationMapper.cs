@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using TeamsNotificationService.Core;
 using TeamsNotificationService.DTOs;
-using TeamsNotificationService.Models;
 
 namespace TeamsNotificationService.Mappers
 {

@@ -1,5 +1,5 @@
-﻿using TeamsNotificationService.Services;
-using TeamsNotificationService.Services.Implementations;
+﻿using TeamsNotificationService.Framework;
+using TeamsNotificationService.Framework.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
