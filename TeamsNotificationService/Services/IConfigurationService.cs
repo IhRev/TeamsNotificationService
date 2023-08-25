@@ -4,6 +4,6 @@ namespace TeamsNotificationService.Services
 {
 	public interface IConfigurationService
 	{
-		NotificationConfiguration GetConfiguration(string notificationServiceName);
+		Task<NotificationConfiguration> GetConfigurationAsync(string notificationServiceName);
 	}
 }
