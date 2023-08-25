@@ -29,7 +29,7 @@ namespace TeamsNotificationService.Services.Implementations
         }
 
         private string GetConfigurationPath(string notificationServiceName) =>
-            $"{iOWrapper.AppPath}{CONFIGURATIONS_FOLDER}/{notificationServiceName}.{FILE_EXTENSION}";
+            $"{iOWrapper.AppPath}{CONFIGURATIONS_FOLDER}/{notificationServiceName.ToLower()}.{FILE_EXTENSION}";
 
         private async Task<string> GetConfigurationAsString(string path) =>
             await iOWrapper.ReadAllTextAsync(path);
