@@ -1,22 +1,28 @@
 ﻿using TeamsNotificationService.Core;
-using TeamsNotificationService.Models;
+using TeamsNotificationService.Exceptions;
 using TeamsNotificationService.Services;
 
 namespace TeamsNotificationService.Framework.Implementations
 {
     public class Notificator : INotificator
     {
-        private readonly IConfigurationService configurationService;
+        private readonly Dictionary<string, INotificationSender> notificationSenders;
 
-        public Notificator(IConfigurationService configurationService)
+        public Notificator(IEnumerable<INotificationSender> senders)
         {
-            this.configurationService = configurationService;
+            notificationSenders = senders.ToDictionary(sender => sender.SourceSystem);
         }
 
         public async Task SendNotification(Notification notificationData)
         {
-            NotificationConfiguration configuration = await configurationService.GetConfigurationAsync(notificationData.SourceSystem);
-
+            if (notificationSenders.TryGetValue(notificationData.SourceSystem, out var sender))
+            {
+                await sender.SendNotification(notificationData);
+            }
+            else
+            {
+                throw new SourceSystemNotFoundException("Notification source system is not supported");
+            }
         }
     }
 }

@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IIOWrapper, IOWrapper>();
 builder.Services.AddScoped<IJsonWrapper, JsonWrapper>();
-builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
+builder.Services.AddScoped<IConfigurationService, NotificationConfigurationProvider>();
+builder.Services.AddScoped<INotificationSender, TeamsNotificationSender>();
 builder.Services.AddScoped<INotificator, Notificator>();
 var app = builder.Build();
 

@@ -1,9 +1,7 @@
-﻿using TeamsNotificationService.Models;
-
-namespace TeamsNotificationService.Services
+﻿namespace TeamsNotificationService.Services
 {
 	public interface IConfigurationService
 	{
-		Task<NotificationConfiguration> GetConfigurationAsync(string notificationServiceName);
+		Task<T> GetConfigurationAsync<T>(string notificationServiceName);
 	}
 }
