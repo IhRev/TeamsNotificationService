@@ -10,12 +10,12 @@ namespace TeamsNotificationService.Framework.Implementations
 
         public Notificator(IEnumerable<INotificationSender> senders)
         {
-            notificationSenders = senders.ToDictionary(sender => sender.SourceSystem);
+            notificationSenders = senders.ToDictionary(sender => sender.SourceSystem.ToLower());
         }
 
         public async Task SendNotification(Notification notificationData)
         {
-            if (notificationSenders.TryGetValue(notificationData.SourceSystem, out var sender))
+            if (notificationSenders.TryGetValue(notificationData.SourceSystem.ToLower(), out var sender))
             {
                 await sender.SendNotification(notificationData);
             }
