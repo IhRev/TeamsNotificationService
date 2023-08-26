@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IIOWrapper, IOWrapper>();
 builder.Services.AddScoped<IJsonWrapper, JsonWrapper>();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IHttpWrapper, HttpWrapper>();
 builder.Services.AddScoped<IConfigurationService, NotificationConfigurationProvider>();
 builder.Services.AddScoped<INotificationSender, TeamsNotificationSender>();
 builder.Services.AddScoped<INotificator, Notificator>();
