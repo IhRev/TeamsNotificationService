@@ -32,7 +32,6 @@
     <None Remove="Core\" />
     <None Remove="Framework\" />
     <None Remove="Framework\Implementations\" />
-    <None Remove="DependencyExtensions\" />
     <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +46,6 @@
     <Folder Include="Core\" />
     <Folder Include="Framework\" />
     <Folder Include="Framework\Implementations\" />
-    <Folder Include="DependencyExtensions\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

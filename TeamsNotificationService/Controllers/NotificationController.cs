@@ -26,7 +26,6 @@ namespace TeamsNotificationService.Controllers
             {
                await notificator.SendNotification(mapper.Map<Notification>(notificationData));
 			   return Ok();
-
             }
             catch (Exception ex)
             {
