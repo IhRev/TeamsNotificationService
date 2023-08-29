@@ -1,4 +1,6 @@
-﻿namespace TeamsNotificationService.System.Implementations
+﻿using System.Net.Http.Headers;
+
+namespace TeamsNotificationService.System.Implementations
 {
 	public class HttpWrapper : IHttpWrapper
     {
@@ -7,6 +9,7 @@
         public HttpWrapper(HttpClient httpClient)
 		{
             this.httpClient = httpClient;
+            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content) =>
