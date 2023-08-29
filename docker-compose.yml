@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  teamsnotificationservice:
+    image: ${DOCKER_REGISTRY-}teamsnotificationservice
+    build:
+      context: .
+      dockerfile: TeamsNotificationService/Dockerfile
