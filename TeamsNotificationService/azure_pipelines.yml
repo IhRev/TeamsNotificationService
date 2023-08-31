@@ -1,55 +1,26 @@
 ﻿trigger:
 - master
 
-pool:
- name: Default
- demands:
- - msbuild
- - visualstudio
- - vstest
-
-variables:
- solution: '**/*.sln'   
- projects: '**/*.csproj'
- testProjects: '**/*Tests.csproj'
- buildConfiguration: 'Release'
+extends:
+ template: azure-pipelines-buildAndTest-template.yml
+ parameters: 
+  buildConfiguration: 'Release'
 
 stages:
- - stage: Building
+ - stage: Deployig
     jobs:
-     - job: RestoreAndBuild
-        steps:
-         - task: NugetToolInstaller@1
-            displayName: NugetInstall
-         - task: NugetCommand@2
-            name: NugetRestore
-            inputs:
-             restoreSolution: '$(solution)'
-         - task: UseDotNet@2
-            inputs:
-            packageType: 'sdk'
-            version: '7.0.307'
-         - task: DotNetCoreCLI@2
-            displayName: Restore
-            inputs:
-            command: restore
-            projects: '$(projects)'
-            arguments: '--configuration $(buildConfiguration)'
-         - task: DotNetCoreCLI@2
-            displayName: Build
-            inputs:
-            command: build
-            projects: '$(projects)'
-            arguments: '--configuration $(buildConfiguration)'
- - stage: Testing
-    jobs:
-     - job: Test
-        dependsOn: RestoreAndBuild
-        condition: failed()
-        steps:
-         - task: DotNetCoreCLI@2
-            displayName: Test
-            inputs:
-             command: test
-             projects: '$(testProjects)'
-             arguments: '--configuration $(buildConfiguration)'
+     job: DeployToDocker
+      dependsOn: Test
+      condition: failed()
+      steps:
+       - task: Docker@2
+          displayName: BuildingAndPushing
+          inputs:
+           command: 'buildAndPush'
+           repository: ''
+           containerRegistry: 'DockerHub'
+           dockerfile: '**/TeamsNotificationService/Dockerfile'
+           buildContext: '$(Build.Repository.LocalPath)'
+           tags: |
+            $(Build.BuildId)
+            latest

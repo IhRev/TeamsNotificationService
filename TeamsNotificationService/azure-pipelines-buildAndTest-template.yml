@@ -1,0 +1,56 @@
+﻿pool:
+ name: Default
+ demands:
+ - msbuild
+ - visualstudio
+ - vstest
+
+variables:
+ solution: '**/*.sln'   
+ projects: '**/*.csproj'
+ testProjects: '**/*Tests.csproj'
+
+parameters:
+ - name: buildConfiguration
+   type: string
+   default: 'Debug'
+
+stages:
+ - stage: Building
+    jobs:
+     - job: RestoreAndBuild
+        steps:
+         - task: NugetToolInstaller@1
+            displayName: NugetInstall
+         - task: NugetCommand@2
+            name: NugetRestore
+            inputs:
+             restoreSolution: '$(solution)'
+         - task: UseDotNet@2
+            inputs:
+            packageType: 'sdk'
+            version: '7.0.307'
+         - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+            command: restore
+            projects: '$(projects)'
+            arguments: --configuration ${{ parameters.buildConfiguration }}
+         - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+            command: build
+            projects: '$(projects)'
+            arguments: --configuration ${{ parameters.buildConfiguration }}
+ - stage: Testing
+    jobs:
+     - job: Test
+        dependsOn: RestoreAndBuild
+        condition: failed()
+        steps:
+         - task: DotNetCoreCLI@2
+            displayName: Test
+            inputs:
+             command: test
+             projects: '$(testProjects)'
+             arguments: --configuration ${{ parameters.buildConfiguration }}
