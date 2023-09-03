@@ -28,4 +28,7 @@
     <Folder Include="Framework\" />
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeamsNotificationService\TeamsNotificationService.csproj" />
+  </ItemGroup>
 </Project>

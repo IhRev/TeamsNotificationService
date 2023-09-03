@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Text;
+﻿using System.Text;
 using TeamsNotificationService.Core;
 using TeamsNotificationService.Models;
 using TeamsNotificationService.System;
@@ -30,24 +29,7 @@ namespace TeamsNotificationService.Services.Implementations
 
         private StringContent GetStringContent(Notification notificationData)
         {
-            var card = new JObject
-            {
-                ["type"] = "message",
-                ["attachments"] = new JArray
-                {
-                    new JObject
-                    {
-                        ["contentType"] = "application/vnd.microsoft.card.hero",
-                        ["content"] = new JObject
-                        {
-                            ["title"] = notificationData.Title,
-                            ["text"] = notificationData.Content,
-                        }
-                    }   
-                }
-            };
-
-            var cardContent = new StringContent(card.ToString(), Encoding.UTF8, "application/json");
+            var cardContent = new StringContent(notificationData.JsonContent, Encoding.UTF8, "application/json");
             return cardContent;
         }
     }
