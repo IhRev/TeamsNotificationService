@@ -21,7 +21,7 @@ namespace TeamsNotificationService.Framework.Implementations
             }
             else
             {
-                throw new SourceSystemNotFoundException("Notification source system is not supported");
+                throw new SourceNotFoundException("Notification source system is not supported");
             }
         }
     }

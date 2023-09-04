@@ -24,7 +24,7 @@ namespace TeamsNotificationService.Services.Implementations
             {
                 throw new ConfigurationNotFoundException("Notification configuration is not found");
             }
-            return SerializeConfiguration<T>(configurationAsString);
+            return DeserializeConfiguration<T>(configurationAsString);
         }
 
         private string GetConfigurationPath(string notificationServiceName) =>
@@ -33,7 +33,7 @@ namespace TeamsNotificationService.Services.Implementations
         private async Task<string> GetConfigurationAsString(string path) =>
             await iOWrapper.ReadAllTextAsync(path);
 
-        private T SerializeConfiguration<T>(string configurationAsString) =>
+        private T DeserializeConfiguration<T>(string configurationAsString) =>
             jsonWraapper.Deserialize<T>(configurationAsString);
     }
 }

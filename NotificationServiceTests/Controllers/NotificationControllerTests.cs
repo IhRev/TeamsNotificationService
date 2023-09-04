@@ -5,16 +5,17 @@ using NSubstitute;
 using TeamsNotificationService.DTOs;
 using TeamsNotificationService.Core;
 using Microsoft.AspNetCore.Mvc;
+using AdaptiveCards;
 
 namespace NotificationServiceTests.Controllers
 {
     [TestClass()]
     public class NotificationControllerTests
     {
-        private INotificator notificator;
-        private IMapper mapper;
-        private NotificationController sut;
-        private NotificationDTO notificationDTO;
+        private INotificator notificator = null!;
+        private IMapper mapper = null!;
+        private NotificationController sut = null!;
+        private NotificationDTO notificationDTO = null!;
 
         [TestInitialize()]
         public void Setup()
@@ -24,7 +25,7 @@ namespace NotificationServiceTests.Controllers
             sut = new(notificator, mapper);
             notificationDTO = new()
             {
-                JsonContent = "content",
+                Card =  new AdaptiveCard(new AdaptiveSchemaVersion(1, 0)),
                 Recipient = "recipient",
                 SourceSystem = "sourceSystem"
             };
@@ -38,13 +39,13 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                JsonContent = notificationDTO.JsonContent
+                Card = notificationDTO.Card
             };
 
             mapper.Map<Notification>(notificationDTO).Returns(notification);
 
             //Act
-            var actual = await sut.SendNotificaction(notificationDTO);
+            ActionResult actual = await sut.SendNotificaction(notificationDTO);
 
             //Assert
             Assert.IsNotNull(actual);
@@ -59,13 +60,13 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                JsonContent = notificationDTO.JsonContent
+                Card = notificationDTO.Card
             };
 
             mapper.When(_ => _.Map<Notification>(notificationDTO)).Throw<AutoMapperMappingException>();
 
             //Act
-            var actual = await sut.SendNotificaction(notificationDTO);
+            ActionResult actual = await sut.SendNotificaction(notificationDTO);
 
             //Assert
             Assert.IsNotNull(actual);
@@ -80,14 +81,14 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                JsonContent = notificationDTO.JsonContent
+                Card = notificationDTO.Card
             };
 
             mapper.Map<Notification>(notificationDTO).Returns(notification);
             notificator.When(_ => _.SendNotification(notification)).Throw<Exception>();
 
             //Act
-            var actual = await sut.SendNotificaction(notificationDTO);
+            ActionResult actual = await sut.SendNotificaction(notificationDTO);
 
             //Assert
             Assert.IsNotNull(actual);

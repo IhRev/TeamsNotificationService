@@ -10,10 +10,10 @@ namespace NotificationServiceTests.Framework
     [TestClass()]
     public class NotificatorTests
     {
-        private INotificator sut;
-        private IEnumerable<INotificationSender> senders;
-        private INotificationSender firstSender;
-        private INotificationSender secondSender;
+        private INotificator sut = null!;
+        private IEnumerable<INotificationSender> senders = null!;
+        private INotificationSender firstSender = null!;
+        private INotificationSender secondSender = null!;
 
         [TestInitialize()]
         public void Setup()
@@ -58,7 +58,7 @@ namespace NotificationServiceTests.Framework
             //Act
 
             //Assert
-            await Assert.ThrowsExceptionAsync<SourceSystemNotFoundException>(async ()
+            await Assert.ThrowsExceptionAsync<SourceNotFoundException>(async ()
                 => await sut.SendNotification(notification));
         }
     }

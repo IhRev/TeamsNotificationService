@@ -2,6 +2,8 @@
 {
 	public class NotificationConfiguration
 	{
-		public string WebhookUrl { get; set; } = string.Empty;
+		public string RecipientName { get; set; } = string.Empty;
+
+        public string WebhookUrl { get; set; } = string.Empty;
     }
 }

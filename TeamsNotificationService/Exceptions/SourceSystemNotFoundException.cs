@@ -1,8 +1,8 @@
 ﻿namespace TeamsNotificationService.Exceptions
 {
-	public class SourceSystemNotFoundException : Exception
+	public class SourceNotFoundException : Exception
 	{
-		public SourceSystemNotFoundException(string message) : base(message)
+		public SourceNotFoundException(string message) : base(message)
 		{
 		}
 	}
