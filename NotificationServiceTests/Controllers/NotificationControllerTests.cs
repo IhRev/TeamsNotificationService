@@ -25,7 +25,6 @@ namespace NotificationServiceTests.Controllers
             sut = new(notificator, mapper);
             notificationDTO = new()
             {
-                Card =  new AdaptiveCard(new AdaptiveSchemaVersion(1, 0)),
                 Recipient = "recipient",
                 SourceSystem = "sourceSystem"
             };
@@ -39,7 +38,6 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                Card = notificationDTO.Card
             };
 
             mapper.Map<Notification>(notificationDTO).Returns(notification);
@@ -60,7 +58,6 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                Card = notificationDTO.Card
             };
 
             mapper.When(_ => _.Map<Notification>(notificationDTO)).Throw<AutoMapperMappingException>();
@@ -81,7 +78,6 @@ namespace NotificationServiceTests.Controllers
             {
                 SourceSystem = notificationDTO.SourceSystem,
                 Recipient = notificationDTO.Recipient,
-                Card = notificationDTO.Card
             };
 
             mapper.Map<Notification>(notificationDTO).Returns(notification);

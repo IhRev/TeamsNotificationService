@@ -27,7 +27,6 @@ namespace NotificationServiceTests.Services
             sut = new TeamsNotificationSender(configurationService, httpWrapper);
             notification = new()
             {
-                Card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0)),
                 SourceSystem = sourceSystem,
                 Recipient = recipient
             };
