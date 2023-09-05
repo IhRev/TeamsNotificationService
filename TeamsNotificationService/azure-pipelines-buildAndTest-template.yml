@@ -42,8 +42,6 @@ stages:
     - script: echo 'Running tests...'
       displayName: Run Tests
   - job: Test
-    dependsOn: RestoreAndBuild
-    condition: failed()
     steps:
     - task: DotNetCoreCLI@2
       displayName: Test
