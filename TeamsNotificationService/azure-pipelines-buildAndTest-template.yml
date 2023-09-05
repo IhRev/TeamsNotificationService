@@ -1,11 +1,4 @@
-﻿pool:
- name: Default
- demands:
- - msbuild
- - visualstudio
- - vstest
-
-variables:
+﻿variables:
  solution: '**/*.sln'   
  projects: '**/*.csproj'
  testProjects: '**/*Tests.csproj'
