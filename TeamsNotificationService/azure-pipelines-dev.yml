@@ -1,14 +1,14 @@
 ﻿trigger:
- - development
+- development
 
- pool:
- name: Default
- demands:
- - msbuild
- - visualstudio
- - vstest
+pool:
+  name: Default
+  demands:
+  - msbuild
+  - visualstudio
+  - vstest
 
 extends:
- template: azure-pipelines-buildAndTest-template.yml
- parameters:
-  buildConfiguration: 'Debug'
+  template: azure-pipelines-buildAndTest-template.yml
+  parameters:
+    buildConfiguration: 'Debug'
