@@ -2,11 +2,7 @@
 - development
 
 pool:
-  name: Default
-  demands:
-  - msbuild
-  - visualstudio
-  - vstest
+  name: Azure Pipelines
 
 extends:
   template: azure-pipelines-buildAndTest-template.yml
