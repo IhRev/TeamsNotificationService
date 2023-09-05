@@ -3,5 +3,5 @@
 
 extends:
  template: azure-pipelines-buildAndTest-template.yml
-  parameters:
-   buildConfiguration: 'Debug'
+ parameters:
+  buildConfiguration: 'Debug'
