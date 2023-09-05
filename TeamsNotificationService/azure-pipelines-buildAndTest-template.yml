@@ -37,6 +37,10 @@ stages:
         arguments: --configuration ${{ parameters.buildConfiguration }}
 - stage: Testing
   jobs:
+  - job: RunTests
+    steps:
+    - script: echo 'Running tests...'
+      displayName: Run Tests
   - job: Test
     dependsOn: RestoreAndBuild
     condition: failed()
