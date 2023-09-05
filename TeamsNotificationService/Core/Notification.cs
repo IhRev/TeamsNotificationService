@@ -1,6 +1,4 @@
-﻿using AdaptiveCards;
-
-namespace TeamsNotificationService.Core
+﻿namespace TeamsNotificationService.Core
 {
     public class Notification
     {
@@ -9,7 +7,5 @@ namespace TeamsNotificationService.Core
         public string SourceSystem { get; set; } = null!;
 
         public string Recipient { get; set; } = null!;
-
-        public AdaptiveCard Card { get; set; } = null!;
     }
 }
