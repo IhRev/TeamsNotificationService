@@ -1,26 +1,28 @@
 ﻿trigger:
 - master
 
+pool:
+  name: Azure Pipelines
+
 extends:
  template: azure-pipelines-buildAndTest-template.yml
  parameters: 
   buildConfiguration: 'Release'
 
 stages:
- - stage: Deployig
-    jobs:
-     job: DeployToDocker
-      dependsOn: Test
-      condition: failed()
-      steps:
-       - task: Docker@2
-          displayName: BuildingAndPushing
-          inputs:
-           command: 'buildAndPush'
-           repository: ''
-           containerRegistry: 'DockerHub'
-           dockerfile: '**/TeamsNotificationService/Dockerfile'
-           buildContext: '$(Build.Repository.LocalPath)'
-           tags: |
-            $(Build.BuildId)
-            latest
+- stage: Deployig
+  dependsOn: Test
+  jobs:
+  - job: DeployToDocker
+    steps:
+    - task: Docker@2
+      displayName: BuildingAndPushing
+      inputs:
+       command: 'buildAndPush'
+       repository: ''
+       containerRegistry: 'DockerHub'
+       dockerfile: '**/TeamsNotificationService/Dockerfile'
+       buildContext: '$(Build.Repository.LocalPath)'
+       tags: |
+        $(Build.BuildId)
+        latest
