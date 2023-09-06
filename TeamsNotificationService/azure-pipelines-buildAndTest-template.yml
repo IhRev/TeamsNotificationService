@@ -36,6 +36,8 @@ stages:
         projects: '$(projects)'
         arguments: --configuration ${{ parameters.buildConfiguration }}
 - stage: Testing
+  dependsOn: Building
+  condition: failed()
   jobs:
   - job: RunTests
     steps:
