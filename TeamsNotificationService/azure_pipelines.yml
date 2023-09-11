@@ -19,7 +19,7 @@ stages:
       displayName: BuildingAndPushing
       inputs:
        command: 'buildAndPush'
-       repository: ''
+       repository: 'ihordeveloper/ihorstudy'
        containerRegistry: 'DockerHub'
        dockerfile: '**/TeamsNotificationService/Dockerfile'
        buildContext: '$(Build.Repository.LocalPath)'
