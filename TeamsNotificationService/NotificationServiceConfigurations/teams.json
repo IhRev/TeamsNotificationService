@@ -1,6 +1,6 @@
 ﻿[
   {
-    "WebhookUrl": "https://precast221.webhook.office.com/webhookb2/4396c783-8766-416f-9e58-bf63942f1b55@e8aea7d2-712d-4fd8-93e1-9fba88d9cad6/IncomingWebhook/7126f869d57f42e6987f5b8a1b0daa05/7ae1e2eb-3463-44f3-a87a-35c3031f9936",
-    "RecipientName": "Test"
+    "WebhookUrl": "my_hook",
+    "RecipientName": "test"
   }
 ]
